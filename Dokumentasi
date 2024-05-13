@@ -1,25 +1,77 @@
-Mengenal Object Request Dan Response
+Membuat Route Untuk Menentukan Response Tertentu
 
-=========================================
+==================================
 
-1. Middleware untuk menampilkan pesan log pada setiap permintaan
+CONTOH KODE SEDERHANA : 
 
-// Middleware untuk menampilkan pesan log pada setiap permintaan
-app.use((req, res, next) => {
-  console.log("Menerima permintaan...");
-  next(); // Melanjutkan ke handler berikutnya
+const express = require("express");
+const app = express();
+
+// Route untuk "/"
+app.get("/", (req, res) => {
+  res.send("Halo, dunia!"); // Mengirimkan "Halo, dunia!" sebagai respons
+});
+
+// Route untuk "/about"
+app.get("/about", (req, res) => {
+  res.send("Ini adalah halaman tentang kami."); // Mengirimkan pesan "Ini adalah halaman tentang kami." sebagai respons
+});
+
+// Route dengan parameter dinamis
+app.get("/greeting/:name", (req, res) => {
+  const name = req.params.name;
+  console.dir(req);
+  res.send(`Halo, ${name}!`); // Mengirimkan pesan salam dengan nama yang diberikan sebagai respons
+});
+
+app.listen(3000, () => {
+  console.log("Server berjalan pada port 3000");
 });
 
 
-=================================
 
-2.   console.dir(req);  ata console.dir(res);
-3. req nya di dapat dari app.use
+====================================
+
+Untuk  Route untuk semua URL :
+
+// Route untuk semua URL
+app.get("*", (req, res) => {
+  const randomResponse = "Ini respons acak";
+
+  res.send(randomResponse);
+});
+
+
+=============================
+
+ini lebih baik :
+
+
+app.use((req, res) => {
+  const randomResponse = "Ini respons acak";
+
+  res.send(randomResponse);
+});
 
 ===============================
 
-4. app.use((req, res, next) => {
-5 req artinya Request
-6. res artinya Response
+penggunaan app.post :
 
-=================================
+
+app.post("/", function (req, res) {
+  res.send("POST request to homepage");
+});
+
+
+==============================
+
+perbedaan get dan post :
+
+1. Mengambil daftar pengguna: /users
+2. Menampilkan halaman profil pengguna: /users/:id
+
+post untuk merubah data server :
+1. Membuat pengguna baru: /users
+2. Mengirimkan formulir pendaftaran: /register
+
+==============================================
