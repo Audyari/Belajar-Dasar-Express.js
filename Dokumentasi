@@ -1,20 +1,25 @@
-Membuat Aplikasi Dengan Express.Js Pertama Kali
+Mengenal Object Request Dan Response
 
-==================================================
+=========================================
 
-buat index. js dan jangan lupa install expres nya
+1. Middleware untuk menampilkan pesan log pada setiap permintaan
 
-const express = require("express");
-const app = express();
-const port = 3000;
-
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+// Middleware untuk menampilkan pesan log pada setiap permintaan
+app.use((req, res, next) => {
+  console.log("Menerima permintaan...");
+  next(); // Melanjutkan ke handler berikutnya
 });
 
 
-===========================================
+=================================
+
+2.   console.dir(req);  ata console.dir(res);
+3. req nya di dapat dari app.use
+
+===============================
+
+4. app.use((req, res, next) => {
+5 req artinya Request
+6. res artinya Response
+
+=================================
