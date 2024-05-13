@@ -1,77 +1,34 @@
-Membuat Route Untuk Menentukan Response Tertentu
+Mempelajari Route Parameter Di Express.Js
 
-==================================
+==========================================
 
-CONTOH KODE SEDERHANA : 
+CONTOH SEDERHANA :
 
 const express = require("express");
 const app = express();
 
-// Route untuk "/"
-app.get("/", (req, res) => {
-  res.send("Halo, dunia!"); // Mengirimkan "Halo, dunia!" sebagai respons
-});
-
-// Route untuk "/about"
-app.get("/about", (req, res) => {
-  res.send("Ini adalah halaman tentang kami."); // Mengirimkan pesan "Ini adalah halaman tentang kami." sebagai respons
-});
-
-// Route dengan parameter dinamis
-app.get("/greeting/:name", (req, res) => {
-  const name = req.params.name;
-  console.dir(req);
-  res.send(`Halo, ${name}!`); // Mengirimkan pesan salam dengan nama yang diberikan sebagai respons
+// Route dengan route parameter
+app.get("/users/:id", (req, res) => {
+  const userId = req.params.id;
+  res.send(`Menampilkan profil pengguna dengan ID: ${userId}`);
 });
 
 app.listen(3000, () => {
   console.log("Server berjalan pada port 3000");
 });
 
-
-
-====================================
-
-Untuk  Route untuk semua URL :
-
-// Route untuk semua URL
-app.get("*", (req, res) => {
-  const randomResponse = "Ini respons acak";
-
-  res.send(randomResponse);
-});
-
-
-=============================
-
-ini lebih baik :
-
-
-app.use((req, res) => {
-  const randomResponse = "Ini respons acak";
-
-  res.send(randomResponse);
-});
-
 ===============================
 
-penggunaan app.post :
+cara lain : 
 
-
-app.post("/", function (req, res) {
-  res.send("POST request to homepage");
+app.get("/id/:nama/:alamat/:notlp", (req, res) => {
+  const { nama, alamat, notlp } = req.params;
+  // Lakukan operasi yang diperlukan dengan data yang diterima
+  // ...
+  res.send(
+    `Data user: Nama = ${nama}, Alamat = ${alamat}, No. Telepon = ${notlp}`
+  );
 });
 
 
-==============================
-
-perbedaan get dan post :
-
-1. Mengambil daftar pengguna: /users
-2. Menampilkan halaman profil pengguna: /users/:id
-
-post untuk merubah data server :
-1. Membuat pengguna baru: /users
-2. Mengirimkan formulir pendaftaran: /register
-
-==============================================
+======================================
