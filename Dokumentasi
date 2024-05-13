@@ -1,34 +1,59 @@
-Mempelajari Route Parameter Di Express.Js
+
+Mendapatkan Nilai Dari Query String :
 
 ==========================================
-
-CONTOH SEDERHANA :
+Kode sederhana :
 
 const express = require("express");
 const app = express();
 
-// Route dengan route parameter
-app.get("/users/:id", (req, res) => {
-  const userId = req.params.id;
-  res.send(`Menampilkan profil pengguna dengan ID: ${userId}`);
+// Route dengan query string
+app.get("/users", (req, res) => {
+  const nama = req.query.nama;
+  const alamat = req.query.alamat;
+  const notlp = req.query.notlp;
+
+  res.send(`Nama: ${nama}, Alamat: ${alamat}, No. Telepon: ${notlp}`);
 });
 
 app.listen(3000, () => {
   console.log("Server berjalan pada port 3000");
 });
 
-===============================
 
-cara lain : 
+=============================
+======================
+Cara menjalankan nya : 
 
-app.get("/id/:nama/:alamat/:notlp", (req, res) => {
-  const { nama, alamat, notlp } = req.params;
-  // Lakukan operasi yang diperlukan dengan data yang diterima
-  // ...
-  res.send(
-    `Data user: Nama = ${nama}, Alamat = ${alamat}, No. Telepon = ${notlp}`
-  );
+1. http://localhost:3000/users?nama=John&alamat=Jalan+Contoh&notlp=123456789
+
+====================================
+
+untuk menampilkan data query nya : 
+
+ console.log(req.query);
+
+==================================
+
+Perbaikan Bugs : 
+
+const express = require("express");
+const app = express();
+
+// Route dengan query string
+app.get("/users", (req, res) => {
+  const nama = req.query.nama || "Nama Belum Di isi";
+  const alamat = req.query.alamat || "Alamat Belum Di isi";
+  const notlp = req.query.notlp || "Nomor telepon Belum Di isi";
+
+  console.log(req.query);
+
+  res.send(`<h1>Nama: ${nama}, Alamat: ${alamat}, No. Telepon: ${notlp}</h1>`);
+});
+
+app.listen(3000, () => {
+  console.log("Server berjalan pada port 3000");
 });
 
 
-======================================
+======================================================
