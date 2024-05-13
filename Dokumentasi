@@ -1,0 +1,36 @@
+Belajar Dasar Express.js
+
+==================================
+Perbedaan antara library (pustaka) dan framework adalah sebagai berikut:
+
+Secara umum, perbedaan utama antara library dan framework adalah pada tingkat kendali yang dimiliki oleh pengembang. Dalam penggunaan library, pengembang memiliki kendali penuh dan dapat 
+memilih bagaimana library digunakan dalam proyek mereka. Namun, dalam penggunaan framework, pengembang harus mengikuti aturan dan konvensi yang ditetapkan oleh framework tersebut dan 
+mengikuti struktur yang telah ditentukan.
+
+============= CODE SEDERHANA :
+
+1. npm init -y
+2. npm install express
+3. buat file index.js
+4. masukkan kode ini : 
+
+const express = require('express');
+
+// Membuat instance aplikasi Express
+const app = express();
+
+// Menangani permintaan GET ke root URL
+app.get('/', (req, res) => {
+  res.send('Halo, dunia!');
+});
+
+// Menjalankan server pada port 3000
+app.listen(3000, () => {
+  console.log('Server berjalan pada port 3000');
+});
+
+=========================
+5. jalankan kode dengan mengetik node index.js
+6. masuk ke http://localhost:3000
+
+===============================================
